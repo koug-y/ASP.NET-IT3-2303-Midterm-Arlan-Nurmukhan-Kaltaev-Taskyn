@@ -103,27 +103,8 @@ curl -X PUT http://localhost:8080/api/tasks/<task-id>/complete
 
 Use asynchronous integration for task-completion notifications.
 
-Recommended flow:
+ flow:
 
 1. `Task Service` marks the task as completed.
 2. The service publishes a `TaskCompleted` integration event.
 3. `NotificationService` consumes the event and sends the email.
-
-### Why asynchronous is the better fit
-
-- Email delivery is not part of the core transaction for task completion.
-- The task-completion endpoint should not fail just because the notification channel is temporarily unavailable.
-- Asynchronous messaging reduces runtime coupling between services.
-- It scales better when new subscribers are added later, such as analytics or audit services.
-
-### Recommended technology
-
-- **RabbitMQ** for event-driven delivery between services.
-- Use an **Outbox Pattern** when persistence is introduced, so task state changes and message publication stay reliable.
-
-### When synchronous HTTP/REST might still be useful
-
-- For direct query scenarios where the caller needs an immediate response.
-- For administrative or operational APIs between services.
-
-For this notification use case, HTTP/REST is less desirable because it couples task completion to NotificationService availability and response time.
