@@ -1,0 +1,10 @@
+services:
+  task-tracker-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task-tracker-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "8080:8080"

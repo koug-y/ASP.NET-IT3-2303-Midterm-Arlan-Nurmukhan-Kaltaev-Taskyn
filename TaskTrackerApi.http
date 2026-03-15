@@ -1,0 +1,29 @@
+@TaskTrackerApi_HostAddress = http://localhost:5081
+
+GET {{TaskTrackerApi_HostAddress}}/api/tasks
+Accept: application/json
+
+###
+
+GET {{TaskTrackerApi_HostAddress}}/api/tasks/insights
+Accept: application/json
+
+###
+
+POST {{TaskTrackerApi_HostAddress}}/api/tasks/bug
+Content-Type: application/json
+
+{
+  "title": "Unable to save task after editing assignee",
+  "severityLevel": "High"
+}
+
+###
+
+POST {{TaskTrackerApi_HostAddress}}/api/tasks/feature
+Content-Type: application/json
+
+{
+  "title": "Add recurring task templates",
+  "estimatedHours": 8
+}
